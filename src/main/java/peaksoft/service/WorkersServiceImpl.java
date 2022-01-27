@@ -9,8 +9,8 @@ import java.util.List;
 public class WorkersServiceImpl implements WorkersService{
     DaoWorkers daoWorkers = new DaoWorkersImpl();
     @Override
-    public int createTable(Workers workers) {
-        return daoWorkers.createTable(workers);
+    public void createTable() {
+        daoWorkers.createTable();
     }
 
     @Override
@@ -31,5 +31,10 @@ public class WorkersServiceImpl implements WorkersService{
     @Override
     public List<Workers> deleteAllWorkers() {
       return    daoWorkers.deleteAllWorkers();
+    }
+
+    @Override
+    public List<Workers> getRemainderWorkers() {
+        return daoWorkers.getRemainderWorkers();
     }
 }

@@ -20,39 +20,37 @@ public class App {
     static Scanner fore = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Workers workers1 = new Workers("Аза", "Атаяров", 23);
-        Workers workers2 = new Workers("Аза", "Курбанов", 21);
-        Workers workers3 = new Workers("Аза", "Маматкадыров", 25);
-        Workers workers4 = new Workers("Nurlan", "Atayarov", 18);
-        Workers workers5 = new Workers("Kutubek", "Gaparov", 17);
-        Workers workers6 = new Workers("Aijan", "serieva", 19);
+
         while (true) {
             cansol();
             int number = scanner.nextInt();
             try {
-                if (number < 0 || number > 4) {
+                if (number < 0 || number > 5) {
                     throw new Exception();
                 }
                 switch (number) {
-                    case 1 ->   dao.getAllWorkers ().forEach(System.out::println);
+                    case 1 -> dao.createTable();
 
+                    case 2 -> dao.getAllWorkers().forEach(System.out::println);
 
-                    case 2 -> {
-                          dao.updateAllWorkers();
+                    case 3 -> {
+                        dao.updateAllWorkers();
                     }
-                    case 3 -> dao.deleteAllWorkers().forEach(System.out::println);
+                    case 4 -> dao.deleteAllWorkers().forEach(System.out::println);
 
-                    case 4 ->{
+                    case 5 -> {
                         System.out.println("write name");
                         String name = foreStr.nextLine();
                         System.out.println("write surname");
                         String surname = foreStr.nextLine();
                         System.out.println("write age");
                         byte age = (byte) fore.nextInt();
-                        dao.saveWorkers(name,surname,age);
+                        dao.saveWorkers(name, surname, age);
+                    }
+                    case 6 ->{
+                        dao.deleteAllWorkers().forEach(System.out::println);
                     }
                 }
-
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -62,9 +60,11 @@ public class App {
     }
 
     public static void cansol() {
-        System.out.println("prent 1 > get All Aza age big from 20");
-        System.out.println("prent 2 > update all Aza age to 18");
-        System.out.println("prent 3 > delete all Aza with age big from 20");
-        System.out.println("prent 4 > save workers to database");
+        System.out.println("prent 1 > create table");
+        System.out.println("prent 2 > get All Aza age big from 20");
+        System.out.println("prent 3 > update all Aza age to 18");
+        System.out.println("prent 4 > delete all Aza with age big from 20");
+        System.out.println("prent 5 > save workers to database");
+        System.out.println("prent 6 > get all Remainder Workers");
     }
 }

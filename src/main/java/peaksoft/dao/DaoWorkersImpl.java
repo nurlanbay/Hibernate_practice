@@ -8,19 +8,18 @@ import java.util.List;
 
 public class DaoWorkersImpl implements DaoWorkers {
     @Override
-    public int createTable(Workers workers) {
+    public void createTable() {
         try {
             Session session = HibernateUtil.setUp().openSession();
             session.beginTransaction();
-            session.save(workers);
             session.getTransaction().commit();
             System.out.println("Create table Successfully");
             session.close();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return workers.getId();
+
     }
     public void saveWorkers(String name, String surname, byte age) {
         Workers workers = new Workers(name,surname,age);
@@ -57,7 +56,7 @@ public class DaoWorkersImpl implements DaoWorkers {
         try {
             Session session = HibernateUtil.setUp().openSession();
             session.beginTransaction();
-            session.createSQLQuery( "update workers set age = 18 where name = 'Аза'").executeUpdate();
+            session.createSQLQuery( "update workers set age = 18 where name = 'Aza'").executeUpdate();
             session.getTransaction().commit();
             System.out.println("update all Aza age successfully");
 
@@ -86,6 +85,17 @@ public class DaoWorkersImpl implements DaoWorkers {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return list1;
+    }
+
+    @Override
+    public List<Workers> getRemainderWorkers() {
+          Session session = HibernateUtil.setUp().openSession();
+          session.beginTransaction();
+          List<Workers> list = session.createQuery("from Workers ").getResultList();
+        List<Workers> list1 = list.stream().toList();
+        session.getTransaction().commit();
+        session.close();
         return list1;
     }
 }
